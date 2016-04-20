@@ -36,7 +36,7 @@ def tokenize(string):
     return re.compile("(!|@|#|%|&|\(|\)|\{|\}|\[|\]|\||\\|\.|\"|;|<|>|\/|_|\+|-|,|\$|\^|\*|\'|\?|=)").split(string)
 
 if __name__ == "__main__":
-    inFile = open("testInput.py", 'r') # opens file as read-only
+    inFile = open("input.py", 'r') # opens file as read-only
     for line in inFile:
         tokens = tokenize(line)
         #for token in tokens:
