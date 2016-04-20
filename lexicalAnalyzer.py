@@ -36,14 +36,7 @@ def tokenize(string):
     return re.compile("(!|@|#|%|&|\(|\)|\{|\}|\[|\]|\||\\|\.|\"|;|<|>|\/|_|\+|-|,|\$|\^|\*|\'|\?|=)").split(string)
 
 if __name__ == "__main__":
-    inFile = open("input.py", 'r') # opens file as read-only
-    for line in inFile:
-        tokens = tokenize(line)
-        #for token in tokens:
-            #pass
-            
-    print( "(ENDMARKER)" )
-    inFile.close()
+    pass
     
 def run():
     inFile = open("testInput.py", 'r')
@@ -58,19 +51,29 @@ def run():
                 readWord(remainingLine)
             elif remainingLine[0].isdigit():
                 readNumber(remainingLine)
-            elif remainingLine[0] == '"':
-                readStringLiteral(remainingLine)
+            elif remainingLine[0] == '"' or remainingLine[0] == "'":
+                readStringLiteral(remainingLine, inFile)
             else: # is punctuation
-                print"(PUNCT) " + str(remainingLine[0])
-                remainingLine = remainingLine[1:]
+                readPunctuation(remainingLine)
     print( "(ENDMARKER)" )
     inFile.close()
     
 def readWord(string):
+    #if word is not keyword, it must be an ID
     pass
     
 def readNumber(string):
+    #Stop at first period if there are no numbers after it
+    #never accept more than 1 period
     pass
     
-def readStringLiteral(string):
+def readStringLiteral(string, inFile):
+    #Check for """ and '''
+    #print error if no closing quotes found on same line
+    #should print error if no closing """ or ''' in document
     pass
+    
+def readPunctuation(string):
+    # if this is not an accepted punctuation, it should be an error
+    print"(PUNCT) " + str(string[0])
+    string = string[1:]
