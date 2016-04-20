@@ -29,11 +29,48 @@ keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "`": "ERROR: symbol not used in python",
 }
 
-def isKeyword(string):
-    return keywords.has_key(string)
+    
+def tokenize(string):
+    string.strip()
+    string.replace(" ", "")
+    return re.compile("(!|@|#|%|&|\(|\)|\{|\}|\[|\]|\||\\|\.|\"|;|<|>|\/|_|\+|-|,|\$|\^|\*|\'|\?|=)").split(string)
 
 if __name__ == "__main__":
     inFile = open("testInput.py", 'r') # opens file as read-only
     for line in inFile:
-        pass
+        tokens = tokenize(line)
+        #for token in tokens:
+            #pass
+            
+    print( "(ENDMARKER)" )
     inFile.close()
+    
+def run():
+    inFile = open("testInput.py", 'r')
+    for line in inFile:
+        remainingLine = line
+        while len(remainingLine > 0):
+            if remainingLine[0].isspace():
+                remainingLine = remainingLine[1:]
+            elif remainingLine[0] == "#":
+                remainingLine = ""
+            elif remainingLine[0].isalpha():
+                readWord(remainingLine)
+            elif remainingLine[0].isdigit():
+                readNumber(remainingLine)
+            elif remainingLine[0] == '"':
+                readStringLiteral(remainingLine)
+            else: # is punctuation
+                print"(PUNCT) " + str(remainingLine[0])
+                remainingLine = remainingLine[1:]
+    print( "(ENDMARKER)" )
+    inFile.close()
+    
+def readWord(string):
+    pass
+    
+def readNumber(string):
+    pass
+    
+def readStringLiteral(string):
+    pass
