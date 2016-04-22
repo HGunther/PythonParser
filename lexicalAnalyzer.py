@@ -42,13 +42,13 @@ def run():
     inFile = open("testInput.py", 'r')
     for line in inFile:
         remainingLine = line
-        while len(remainingLine > 0):
+        while len(remainingLine) > 0:
             if remainingLine[0].isspace():
                 remainingLine = remainingLine[1:]
             elif remainingLine[0] == "#":
                 remainingLine = ""
             elif remainingLine[0].isalpha():
-                readWord(remainingLine)
+                remainingLine = readWord(remainingLine)
             elif remainingLine[0].isdigit():
                 readNumber(remainingLine)
             elif remainingLine[0] == '"' or remainingLine[0] == "'":
@@ -64,9 +64,11 @@ def readWord(string):
     while string[0].isalnum() and len(string) > 0:
         word += string[0]
         string = string[1:]
-    print "(ID) " + str(word)
+    if keywords.has_key(word):
+        print "(KEYWORD) " + str(word)
+    else:
+        print "(ID) " + str(word)
     return string
-    pass
     
 def readNumber(string):
     #Stop at first period if there are no numbers after it
@@ -77,7 +79,14 @@ def readStringLiteral(string, inFile):
     #Check for """ and '''
     #print error if no closing quotes found on same line
     #should print error if no closing """ or ''' in document
-    pass
+    phrase = ""
+    if string[0] == string[1] == string[2] == "'":
+        #pass
+    elif string[0] == string[1] == string[2] == '"':
+        pass
+    else:
+        pass
+        
     
 def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
