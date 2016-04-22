@@ -24,9 +24,9 @@ keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "&=": "DELIMITER", "|=": "DELIMITER", "^=": "DELIMITER", ">>=": "DELIMITER",
 "<<=": "DELIMITER", "**=": "DELIMITER",
 
-"$": "(ERROR): symbol not used in python",
-"?": "(ERROR): symbol not used in python",
-"`": "(ERROR): symbol not used in python",
+"$": "ERROR",
+"?": "ERROR",
+"`": "ERROR",
 }
 
     
@@ -59,7 +59,7 @@ def run():
 def readWord(string):
     #if word is not keyword, it must be an ID
     word = ""
-    while string[0].isalnum() and len(string) > 0:
+    while (string[0].isalnum() or string[0] == "_") and len(string) > 0:
         word += string[0]
         string = string[1:]
     if keywords.has_key(word):
@@ -96,7 +96,7 @@ def readStringLiteral(string):
     phrase = ""
     endPos = string.find(string[0], 1)
     if endPos == -1:
-        print "(ERROR) No end quotation mark at the end of string literal"
+        print "(ERROR No end quotation mark at the end of string literal)"
         return ""
     else:        
         phrase = string[: endPos + 1]
@@ -107,10 +107,10 @@ def readStringLiteral(string):
     
 def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
-    if keywords.has_key(string[0]) and keywords[string[0]] == "DELIMITER":
-        print "(PUNCT " + " " + string[0] + ")"
+    if keywords.has_key(string[0]) and (keywords[string[0]] != "ERROR"):
+        print "(PUNCT " + " " + string[0] +")"
     else: 
-        print "(ERROR: This punctuation is not used in Python)"
+        print "(ERROR: '" + string[0] + "' is a punctuation not used in Python)" 
     return string[1:]
 
 
