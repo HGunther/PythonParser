@@ -60,6 +60,12 @@ def run():
     
 def readWord(string):
     #if word is not keyword, it must be an ID
+    word = ""
+    while string[0].isalnum() and len(string) > 0:
+        word += string[0]
+        string = string[1:]
+    print "(ID) " + str(word)
+    return string
     pass
     
 def readNumber(string):
