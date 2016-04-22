@@ -24,9 +24,9 @@ keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "&=": "DELIMITER", "|=": "DELIMITER", "^=": "DELIMITER", ">>=": "DELIMITER",
 "<<=": "DELIMITER", "**=": "DELIMITER",
 
-"$": "ERROR: symbol not used in python",
-"?": "ERROR: symbol not used in python",
-"`": "ERROR: symbol not used in python",
+"$": "(ERROR): symbol not used in python",
+"?": "(ERROR): symbol not used in python",
+"`": "(ERROR): symbol not used in python",
 }
 
     
@@ -83,6 +83,7 @@ def readStringLiteral(string):
     endPos = string.find(string[0], 1)
     if endPos == -1:
         print "(ERROR) No end quotation mark at the end of string literal"
+        return ""
     else:        
         phrase = string[: endPos + 1]
         string = string[endPos + 1:]
@@ -92,5 +93,8 @@ def readStringLiteral(string):
     
 def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
-    print"(PUNCT) " + str(string[0]) 
+    if keywords.has_key(string[0]) and keywords[string[0]] == "DELIMITER":
+        print "(PUNCT) " + " " + string[0]
+    else: 
+        print "ERROR: This punctuation is not used in Python" 
     return string[1:]
