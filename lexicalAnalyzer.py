@@ -39,7 +39,7 @@ if __name__ == "__main__":
     pass
     
 def run():
-    inFile = open("testInput.py", 'r')
+    inFile = open("input.py", 'r')
     for line in inFile:
         remainingLine = line
         while len(remainingLine) > 0:
@@ -52,9 +52,9 @@ def run():
             elif remainingLine[0].isdigit():
                 readNumber(remainingLine)
             elif remainingLine[0] == '"' or remainingLine[0] == "'":
-                readStringLiteral(remainingLine, inFile)
+                remainingLine = readStringLiteral(remainingLine, inFile)
             else: # is punctuation
-                readPunctuation(remainingLine)
+                remainingLine = readPunctuation(remainingLine)
     print( "(ENDMARKER)" )
     inFile.close()
     
@@ -75,20 +75,22 @@ def readNumber(string):
     #never accept more than 1 period
     pass
     
-def readStringLiteral(string, inFile):
+def readStringLiteral(string):
     #Check for """ and '''
     #print error if no closing quotes found on same line
     #should print error if no closing """ or ''' in document
     phrase = ""
-    if string[0] == string[1] == string[2] == "'":
-        #pass
-    elif string[0] == string[1] == string[2] == '"':
-        pass
-    else:
-        pass
+    endPos = string.find(string[0], 1)
+    if endPos == -1:
+        print "(ERROR) No end quotation mark at the end of string literal"
+    else:        
+        phrase = string[: endPos + 1]
+        string = string[endPos + 1:]
+        print "(LIT) " + str(phrase)
+    return string
         
     
 def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
-    print"(PUNCT) " + str(string[0])
-    string = string[1:]
+    print"(PUNCT) " + str(string[0]) 
+    return string[1:]
