@@ -63,9 +63,9 @@ def readWord(string):
         word += string[0]
         string = string[1:]
     if keywords.has_key(word):
-        print "(KEYWORD) " + str(word)
+        print "(KEYWORD " + str(word) + ")"
     else:
-        print "(ID) " + str(word)
+        print "(ID " + str(word) + ")"
     return string
 
 def readNumber(string):
@@ -101,16 +101,16 @@ def readStringLiteral(string):
     else:        
         phrase = string[: endPos + 1]
         string = string[endPos + 1:]
-        print "(LIT) " + str(phrase)
+        print "(LIT " + str(phrase) + ")"
     return string
         
     
 def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
     if keywords.has_key(string[0]) and keywords[string[0]] == "DELIMITER":
-        print "(PUNCT) " + " " + string[0]
+        print "(PUNCT " + " " + string[0] + ")"
     else: 
-        print "ERROR: This punctuation is not used in Python" 
+        print "(ERROR: This punctuation is not used in Python)"
     return string[1:]
 
 
