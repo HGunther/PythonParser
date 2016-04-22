@@ -17,7 +17,11 @@ keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "with": "KEYWORD", "as": "KEYWORD", "elif": "KEYWORD", "if": "KEYWORD",
 "or": "KEYWORD", "yield": "KEYWORD", "assert": "KEYWORD", "else": "KEYWORD",
 "import": "KEYWORD", "pass": "KEYWORD", "break": "KEYWORD", "except": "KEYWORD",
-"in": "KEYWORD", "raise": "KEYWORD", "print": "KEYWORD",
+"in": "KEYWORD", "raise": "KEYWORD", "map": "KEYWORD", "filter" : "KEYWORD",
+"reduce" : "KEYWORD", "len": "KEYWORD",
+"print": "KEYWORD",
+"int" : "KEYWORD", "float" : "KEYWORD", "str" : "KEYWORD", "complex" : "KEYWORD",
+"bool" : "KEYWORD", "list": "KEYWORD", "dict": "KEYWORD", "set" : "KEYWORD",
 
 "+": "OPERATOR", "-": "OPERATOR", "*": "OPERATOR",  "**": "OPERATOR", "/": "OPERATOR",
 "//": "OPERATOR", "%": "OPERATOR", "@": "OPERATOR", "<<": "OPERATOR", ">>": "OPERATOR", 
@@ -47,7 +51,7 @@ def run():
                 remainingLine = remainingLine[1:]
             elif remainingLine[0] == "#":
                 remainingLine = ""
-            elif remainingLine[0].isalpha():
+            elif (remainingLine[0].isalpha() or remainingLine[0] == "_"):
                 remainingLine = readWord(remainingLine)
             elif remainingLine[0].isdigit():
                 remainingLine = readNumber(remainingLine)
