@@ -9,7 +9,7 @@ keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "with": "KEYWORD", "as": "KEYWORD", "elif": "KEYWORD", "if": "KEYWORD",
 "or": "KEYWORD", "yield": "KEYWORD", "assert": "KEYWORD", "else": "KEYWORD",
 "import": "KEYWORD", "pass": "KEYWORD", "break": "KEYWORD", "except": "KEYWORD",
-"in": "KEYWORD", "raise": "KEYWORD",
+"in": "KEYWORD", "raise": "KEYWORD", "print": "KEYWORD",
 
 "+": "OPERATOR", "-": "OPERATOR", "*": "OPERATOR",  "**": "OPERATOR", "/": "OPERATOR",
 "//": "OPERATOR", "%": "OPERATOR", "@": "OPERATOR", "<<": "OPERATOR", ">>": "OPERATOR", 
@@ -53,7 +53,7 @@ def run():
                 remainingLine = readStringLiteral(remainingLine)
             else: # is punctuation
                 remainingLine = readPunctuation(remainingLine)
-    print( "(ENDMARKER)" )
+    print "(ENDMARKER)"
     inFile.close()
     
 def readWord(string):
