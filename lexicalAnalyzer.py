@@ -35,8 +35,6 @@ def tokenize(string):
     string.replace(" ", "")
     return re.compile("(!|@|#|%|&|\(|\)|\{|\}|\[|\]|\||\\|\.|\"|;|<|>|\/|_|\+|-|,|\$|\^|\*|\'|\?|=)").split(string)
 
-if __name__ == "__main__":
-    pass
     
 def run():
     inFile = open("input.py", 'r')
@@ -50,9 +48,9 @@ def run():
             elif remainingLine[0].isalpha():
                 remainingLine = readWord(remainingLine)
             elif remainingLine[0].isdigit():
-                readNumber(remainingLine)
+                remainingLine = readNumber(remainingLine)
             elif remainingLine[0] == '"' or remainingLine[0] == "'":
-                remainingLine = readStringLiteral(remainingLine, inFile)
+                remainingLine = readStringLiteral(remainingLine)
             else: # is punctuation
                 remainingLine = readPunctuation(remainingLine)
     print( "(ENDMARKER)" )
@@ -69,12 +67,28 @@ def readWord(string):
     else:
         print "(ID) " + str(word)
     return string
-    
+
 def readNumber(string):
     #Stop at first period if there are no numbers after it
     #never accept more than 1 period
-    pass
-    
+    number = ""
+    while len(string) > 0:
+        if string[0].isdigit():
+            number += string[0]
+        elif string[0] == "j":
+            number += string[0]
+        elif string[0] == "." and "." not in number:
+            number += string[0]
+        elif string[0] == "." and number.count(".") >= 1:
+            print "(ERROR UNEXPECTED DECIMAL POINT)"
+            return ""
+        else:
+            break
+        string = string[1:]
+
+    print "(LIT " + number + ")"
+    return string
+
 def readStringLiteral(string):
     #Check for """ and '''
     #print error if no closing quotes found on same line
@@ -98,3 +112,7 @@ def readPunctuation(string):
     else: 
         print "ERROR: This punctuation is not used in Python" 
     return string[1:]
+
+
+if __name__ == "__main__":
+    run()
