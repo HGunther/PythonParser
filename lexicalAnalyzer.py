@@ -1,5 +1,13 @@
-import sys
-import re
+'''
+# PythonParser
+Project for CS4700 Programming Languages
+
+Students:
+Hans Gunther A01077132
+Mikaila Young A01741449
+Francisco Arrieta A01245365
+'''
+
 
 keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "is": "KEYWORD", "return": "KEYWORD", "None": "KEYWORD", "continue": "KEYWORD",
@@ -29,13 +37,7 @@ keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "`": "ERROR",
 }
 
-    
-def tokenize(string):
-    string.strip()
-    string.replace(" ", "")
-    return re.compile("(!|@|#|%|&|\(|\)|\{|\}|\[|\]|\||\\|\.|\"|;|<|>|\/|_|\+|-|,|\$|\^|\*|\'|\?|=)").split(string)
 
-    
 def run():
     inFile = open("input.py", 'r')
     for line in inFile:
@@ -55,7 +57,8 @@ def run():
                 remainingLine = readPunctuation(remainingLine)
     print "(ENDMARKER)"
     inFile.close()
-    
+
+
 def readWord(string):
     #if word is not keyword, it must be an ID
     word = ""
@@ -67,6 +70,7 @@ def readWord(string):
     else:
         print "(ID " + str(word) + ")"
     return string
+
 
 def readNumber(string):
     #Stop at first period if there are no numbers after it
@@ -89,6 +93,7 @@ def readNumber(string):
     print "(LIT " + number + ")"
     return string
 
+
 def readStringLiteral(string):
     #Check for """ and '''
     #print error if no closing quotes found on same line
@@ -108,7 +113,7 @@ def readStringLiteral(string):
 def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
     if keywords.has_key(string[0]) and (keywords[string[0]] != "ERROR"):
-        print "(PUNCT " + " " + string[0] +")"
+        print "(PUNCT " + " " + string[0] + ")"
     else: 
         print "(ERROR: '" + string[0] + "' is a punctuation not used in Python)" 
     return string[1:]
