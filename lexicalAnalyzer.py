@@ -7,7 +7,7 @@ Hans Gunther A01077132
 Mikaila Young A01741449
 Francisco Arrieta A01245365
 '''
-
+import sys
 
 keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "is": "KEYWORD", "return": "KEYWORD", "None": "KEYWORD", "continue": "KEYWORD",
@@ -72,7 +72,7 @@ def readWord(string):
     if keywords.has_key(word):
         print "(KEYWORD " + str(word) + ")"
     else:
-        print "(ID " + str(word) + ")"
+        print "(ID \"" + str(word) + "\")"
     return string
 
 
@@ -89,12 +89,12 @@ def readNumber(string):
             number += string[0]
         elif string[0] == "." and number.count(".") >= 1:
             print "(ERROR UNEXPECTED DECIMAL POINT)"
-            return ""
+            sys.exit(0)
         else:
             break
         string = string[1:]
 
-    print "(LIT " + number + ")"
+    print "(LIT \"" + number + "\")"
     return string
 
 
@@ -106,22 +106,33 @@ def readStringLiteral(string):
     endPos = string.find(string[0], 1)
     if endPos == -1:
         print "(ERROR No end quotation mark at the end of string literal)"
-        return ""
-    else:        
+        sys.exit(0)
+    else:
         phrase = string[: endPos + 1]
         string = string[endPos + 1:]
-        print "(LIT " + str(phrase) + ")"
+        print "(LIT \"" + str(phrase) + "\")"
     return string
-        
+
     
 def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
     if keywords.has_key(string[0]) and (keywords[string[0]] != "ERROR"):
-        print "(PUNCT " + " " + string[0] + ")"
+        print "(PUNCT \"" + string[0] + "\")"
     else: 
-        print "(ERROR: '" + string[0] + "' is a punctuation not used in Python)" 
+        print "(ERROR: \"" + string[0] + "\" is a punctuation not used in Python)"
+        sys.exit(0)
     return string[1:]
 
 
 if __name__ == "__main__":
     run()
+
+'''
+# PythonParser
+Project for CS4700 Programming Languages
+
+Students:
+Hans Gunther A01077132
+Mikaila Young A01741449
+Francisco Arrieta A01245365
+'''
