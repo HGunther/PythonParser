@@ -59,6 +59,7 @@ def run():
                 remainingLine = readStringLiteral(remainingLine)
             else: # is punctuation
                 remainingLine = readPunctuation(remainingLine)
+        print "(PUNCT \\n)"
     print "(ENDMARKER)"
     inFile.close()
 
