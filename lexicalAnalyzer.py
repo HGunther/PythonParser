@@ -60,9 +60,9 @@ def run():
             else: # is punctuation
                 remainingLine = readPunctuation(remainingLine)
         print "(PUNCT \\n)"
-        outFile.write("(PUNCT \\n)")
+        outFile.write("(PUNCT \\n)" + "\n")
     print "(ENDMARKER)"
-    outFile.write("(ENDMARKER)")
+    outFile.write("(ENDMARKER)" + "\n")
     inFile.close()
 
 
@@ -74,10 +74,10 @@ def readWord(string):
         string = string[1:]
     if keywords.has_key(word):
         print "(KEYWORD " + str(word) + ")"
-        outFile.write("(KEYWORD " + str(word) + ")")
+        outFile.write("(KEYWORD " + str(word) + ")" + "\n")
     else:
         print "(ID \"" + str(word) + "\")"
-        outFile.write("(ID \"" + str(word) + "\")")
+        outFile.write("(ID \"" + str(word) + "\")" + "\n")
     return string
 
 
@@ -94,14 +94,14 @@ def readNumber(string):
             number += string[0]
         elif string[0] == "." and number.count(".") >= 1:
             print "(ERROR UNEXPECTED DECIMAL POINT)"
-            outFile.write("(ERROR UNEXPECTED DECIMAL POINT)")
+            outFile.write("(ERROR UNEXPECTED DECIMAL POINT)" + "\n")
             sys.exit(0)
         else:
             break
         string = string[1:]
 
     print "(LIT \"" + number + "\")"
-    outFile.write("(LIT \"" + number + "\")")
+    outFile.write("(LIT \"" + number + "\")" + "\n")
     return string
 
 
@@ -113,13 +113,13 @@ def readStringLiteral(string):
     endPos = string.find(string[0], 1)
     if endPos == -1:
         print "(ERROR No end quotation mark at the end of string literal)"
-        outFile.write("(ERROR No end quotation mark at the end of string literal)")
+        outFile.write("(ERROR No end quotation mark at the end of string literal)" + "\n")
         sys.exit(0)
     else:
         phrase = string[: endPos + 1]
         string = string[endPos + 1:]
         print "(LIT \"" + str(phrase) + "\")"
-        outFile.write("(LIT \"" + str(phrase) + "\")")
+        outFile.write("(LIT \"" + str(phrase) + "\")" + "\n")
     return string
 
     
@@ -127,10 +127,10 @@ def readPunctuation(string):
     # if this is not an accepted punctuation, it should be an error
     if keywords.has_key(string[0]) and (keywords[string[0]] != "ERROR"):
         print "(PUNCT \"" + string[0] + "\")"
-        outFile.write("(PUNCT \"" + string[0] + "\")")
+        outFile.write("(PUNCT \"" + string[0] + "\")" + "\n")
     else: 
         print "(ERROR: \"" + string[0] + "\" is a punctuation not used in Python)"
-        outFile.write("(ERROR: \"" + string[0] + "\" is a punctuation not used in Python)")
+        outFile.write("(ERROR: \"" + string[0] + "\" is a punctuation not used in Python)" + "\n")
         sys.exit(0)
     return string[1:]
 
