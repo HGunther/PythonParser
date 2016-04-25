@@ -48,6 +48,8 @@ def run():
         remainingLine = line
         while len(remainingLine) > 0:
             if remainingLine[0].isspace():
+                if remainingLine[0] == "\t":
+                    print "(PUNCT \"\\t\")"
                 remainingLine = remainingLine[1:]
             elif remainingLine[0] == "#":
                 remainingLine = ""
