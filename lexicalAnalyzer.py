@@ -8,6 +8,7 @@ Mikaila Young A01741449
 Francisco Arrieta A01245365
 '''
 import sys
+import os
 
 keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 "is": "KEYWORD", "return": "KEYWORD", "None": "KEYWORD", "continue": "KEYWORD",
@@ -43,6 +44,9 @@ keywords = {"False": "KEYWORD", "class": "KEYWORD", "finally": "KEYWORD",
 outFile = open("out.txt", 'w')
 
 def run():
+    if not os.path.isfile("input.py"):
+        print "File does not exist"
+        return
     inFile = open("input.py", 'r')
     for line in inFile:
         remainingLine = line
