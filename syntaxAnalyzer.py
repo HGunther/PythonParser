@@ -1,19 +1,22 @@
 
 
 def run():
-    #read from text file
-    # start loop
-        #read in tab level
-        #if first symbol is id then...
-        #if first symbol is punctuation...
     inFile = open("out.txt", 'r')
     for line in inFile:
         _type = line.split()[0]
+        sym = line.split()[1]
+        sym = line.split('"')[1]
         if _type == "(ENDMARKER)":
             pass
         elif _type == "(PUNCT":
             pass
         elif _type == "(KEYWORD":
+            if sym == "if":
+                pass
+            elif sym == "return":
+                pass
+            else:
+                pass
             pass
         elif _type == "(ID":
             pass
