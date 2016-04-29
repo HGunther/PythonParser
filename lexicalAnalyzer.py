@@ -66,7 +66,7 @@ def run():
             else: # is punctuation
                 remainingLine = readPunctuation(remainingLine)
         print "(PUNCT \\n)"
-        outFile.write("(PUNCT \\n)" + "\n")
+        outFile.write("(PUNCT \"\\n\")" + "\n")
     print "(ENDMARKER)"
     outFile.write("(ENDMARKER)" + "\n")
     inFile.close()
@@ -79,8 +79,8 @@ def readWord(string):
         word += string[0]
         string = string[1:]
     if keywords.has_key(word):
-        print "(KEYWORD " + str(word) + ")"
-        outFile.write("(KEYWORD " + str(word) + ")" + "\n")
+        print "(KEYWORD \"" + str(word) + "\")"
+        outFile.write("(KEYWORD \"" + str(word) + "\")" + "\n")
     else:
         print "(ID \"" + str(word) + "\")"
         outFile.write("(ID \"" + str(word) + "\")" + "\n")
