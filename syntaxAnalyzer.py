@@ -54,12 +54,18 @@ def processLine(lineString, lineArray, tabs=0):
 
 	print lineString
 	# print lineArray
+
+	# Assignments
 	if lineString[0] == "I" and lineString[1] == "=":
 		print str(tabs * "\t") + str(lineArray[0]) + " = <expr>" + " # <assign_statement>"
 		processLine(lineString[2:], lineArray[2:], tabs + 1)
+
+	# return statements
 	elif lineString[0] == "K" and lineArray[0] == "return":
 		print str(tabs * "\t") + str(lineArray[0]) + " => <expr>" + " # <return_statement>"
 		processLine(lineString[1:], lineArray[1:], tabs + 1)
+
+	# If statements
 	elif lineString[0] == "K" and lineArray[0] == "if":
 		if lineArray[-1] == ":":
 			print str(tabs * "\t") + str(lineArray[0])
@@ -67,13 +73,18 @@ def processLine(lineString, lineArray, tabs=0):
 		else:
 			print str(tabs * "\t") + " Error, not colon found at end of if_statement \':\'"
 			print lineArray
+
+	# Print statements
 	elif lineString[0] == "K" and lineArray[0] == "print":
 		print str(tabs * "\t") + " <print_statement>"
 		processLine(lineString[1:], lineArray[1:], tabs + 1)
 
 	# Function call
-	# elif lineString[0] == "I" and lineString[1] == "(":
-	#
+	elif lineString[0] == "I" and lineString[1] == "(":
+		outerString, outerArray, innerString, innerArray, remainderString, remainderArray = splitOnParenthesis(lineString, lineArray)
+		print str(tabs * "\t") + str(outerArray[0:2]) + " <expr> " + str(outerArray[2])
+		processLine(innerString, innerArray, tabs + 1)
+		processLine(remainderString, remainderArray, tabs)
 
 
 	else:
@@ -82,6 +93,7 @@ def processLine(lineString, lineArray, tabs=0):
 
 
 		# sys.stdout.write('.')
+
 
 
 

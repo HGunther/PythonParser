@@ -5,3 +5,6 @@ def foo(var):
 	return var + x
 
 print foo(5)
+
+
+foo(4) + 4 # function_call <expr> + <expr>
