@@ -85,7 +85,7 @@ def processLine(lineString, lineArray, tabs=0):
 
 
 
-def splitOnParenthesis(string):
+def splitOnParenthesis(string, array):
 	level = 0
 	openPos = -1
 	closePos = -1
@@ -98,10 +98,13 @@ def splitOnParenthesis(string):
 			level -= 1
 			if level == 0 and closePos == -1:
 				closePos = i
-	outer = string[: openPos + 1] + string[closePos: closePos + 1]
-	inner = string[openPos + 1:closePos]
-	remainder = string[closePos + 1:]
-	return (outer, inner, remainder)
+	outerString = string[: openPos + 1] + string[closePos: closePos + 1]
+	outerArray = array[: openPos + 1] + array[closePos: closePos + 1]
+	innerString = string[openPos + 1:closePos]
+	innerArray = array[openPos + 1:closePos]
+	remainderString = string[closePos + 1:]
+	remainderArray = array[closePos + 1:]
+	return (outerString, outerArray, innerString, innerArray, remainderString, remainderArray)
 
 
 def getExpression():
