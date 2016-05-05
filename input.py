@@ -1,4 +1,6 @@
 x = 1
+# x = <expr> # Assign statement
+# x = 1
 def foo(var):
 	if var > 0:
 		print "Var is greater than 0"
